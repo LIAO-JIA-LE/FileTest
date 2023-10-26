@@ -11,8 +11,16 @@ builder.Services.AddMvc();
 
 var app = builder.Build();
 
+app.Urls.Add("http://localhost:5003");
 //提供靜態文件
 app.UseStaticFiles();
+//CROS
+app.UseCors(builder =>
+{
+    builder.AllowAnyOrigin() // 允许任何来源
+            .AllowAnyMethod() // 允许任何HTTP方法
+            .AllowAnyHeader(); // 允许任何HTTP标头
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
